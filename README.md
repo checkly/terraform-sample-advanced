@@ -1,12 +1,14 @@
-# Terraform Basic Sample
+# Terraform Demo Advanced
 
 A sample Terraform setup for Checkly. When applied, will provision:
-- 3 browser checks
+- 7 browser checks
 - 6 (placeholder) API checks
 - 3 groups
 - 2 alert channels
+- 1 maintenance window
+- 1 dashboard
 
-Scripts for browser checks are found in `/scripts`. With the current configuration, a browser check will be created for each script in `/scripts`.
+Browser checks are found in `/critical-user-flows`. With the current configuration, a browser check will be created for each spec in `/critical-user-flows`.
 
 ## Usage
 
