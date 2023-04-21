@@ -297,11 +297,11 @@ resource "checkly_alert_channel" "slack_ac" {
 
 
 resource "checkly_check_group" "test_group1" {
-  name      = "critical user flows"
+  name      = "Critical User Flows"
   activated = true
   muted     = false
   tags = [
-    "terraform", "critical-flow-tag"
+    "terraform", "critical-user-flows"
   ]
   concurrency = 300
   locations = [
