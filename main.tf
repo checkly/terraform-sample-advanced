@@ -330,13 +330,13 @@ resource "checkly_check" "browser-check" {
     activated  = true
   }
   environment_variables = { // This sets check-level environment variables
-    TEST_EMAIL      = "user@email.com",
     TEST_USER_ID    = "7d8d8288-43a6-44b0-ba08-4c5736c1b6ed",
     USER_EMAIL      = "user@email.com",
     USER_PASSWORD   = "supersecure1",
     FILE_PATH       = "tests/fixtures/file.jpg",
     TEST_FILE_PATH  = "tests/fixtures/invoice-20-07-02.pdf",
     ENVIRONMENT_URL = "https://checklyhq.com"
+    PRODUCTS_NUMBER = "3"
   }
 
   script = file("${path.module}/critical-user-flows/${each.key}") // Assigns the script contained in each file to each new created check resource

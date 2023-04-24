@@ -8,7 +8,7 @@ A sample Terraform setup for Checkly. When applied, will provision:
 - 1 maintenance window
 - 1 dashboard
 
-Browser checks are found in `/critical-user-flows`. With the current configuration, a browser check will be created for each spec in `/critical-user-flows`.
+Scripts are found in `/critical-user-flows`. With the current configuration, a browser check will be created for each spec in `/critical-user-flows`.
 
 ## Usage
 
