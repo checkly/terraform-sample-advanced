@@ -354,9 +354,14 @@ resource "checkly_maintenance_windows" "maintenance-1" {
   ]
 }
 
+// Either declare a variable default here or create a .tfvars file that references URL
+variable "custom_url" {
+  type    = string
+}
+
 resource "checkly_dashboard" "dashboard-main" {
-  custom_url      = "danube123"                            // A unique subdomain name under "checklyhq.com"
-  custom_domain   = "status.danube123.com"                 // A custom user domain
+  custom_url      = var.custom_url                           // A unique subdomain name under "checklyhq.com"
+  custom_domain   = "status.${var.custom_url}.com"               // A custom user domain
   logo            = "https://www.danube-web.shop/logo.png" // URL pointing to an image/logo for the page
   header          = "Public dashboard"                     // What text to display at the top of your dashboard
   refresh_rate    = 60                                     // How often to refresh the dashboard in seconds
