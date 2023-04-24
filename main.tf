@@ -1,6 +1,6 @@
 variable "checkly_api_key" {}
 variable "checkly_account_id" {}
-variable "custom_url" {}
+variable "checkly_dashboard_url" {}
 
 terraform {
   required_providers {
@@ -356,8 +356,8 @@ resource "checkly_maintenance_windows" "maintenance-1" {
 }
 
 resource "checkly_dashboard" "dashboard-main" {
-  custom_url      = var.custom_url                           // A unique subdomain name under "checklyhq.com"
-  custom_domain   = "status.${var.custom_url}.com"               // A custom user domain
+  custom_url      = var.checkly_dashboard_url                           // A unique subdomain name under "checklyhq.com"
+  custom_domain   = "status.${var.checkly_dashboard_url}.com"               // A custom user domain
   logo            = "https://www.danube-web.shop/logo.png" // URL pointing to an image/logo for the page
   header          = "Public dashboard"                     // What text to display at the top of your dashboard
   refresh_rate    = 60                                     // How often to refresh the dashboard in seconds
