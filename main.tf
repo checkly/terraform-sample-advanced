@@ -1,5 +1,6 @@
 variable "checkly_api_key" {}
 variable "checkly_account_id" {}
+variable "custom_url" {}
 
 terraform {
   required_providers {
@@ -303,7 +304,7 @@ resource "checkly_check_group" "test_group1" {
   tags = [
     "terraform", "critical-user-flows"
   ]
-  concurrency = 300
+  concurrency = 10
   locations = [
     "us-west-1",
   ]
@@ -344,19 +345,14 @@ resource "checkly_check" "browser-check" {
 
 resource "checkly_maintenance_windows" "maintenance-1" {
   name            = "Maintenance Windows"
-  starts_at       = "2022-04-24T00:00:00.000Z"
-  ends_at         = "2022-04-25T00:00:00.000Z"
+  starts_at       = "2023-04-24T00:00:00.000Z"
+  ends_at         = "2023-04-25T00:00:00.000Z"
   repeat_unit     = "MONTH"
-  repeat_ends_at  = "2023-08-24T00:00:00.000Z"
+  repeat_ends_at  = "2024-08-24T00:00:00.000Z"
   repeat_interval = 1
   tags = [
     "auto", "terraform"
   ]
-}
-
-// Either declare a variable default here or create a .tfvars file that references URL
-variable "custom_url" {
-  type    = string
 }
 
 resource "checkly_dashboard" "dashboard-main" {
