@@ -24,7 +24,6 @@ resource "checkly_check" "get-users" {
   should_fail               = false
   frequency                 = 1
   double_check              = true
-  ssl_check                 = true
   use_global_alert_settings = true
   degraded_response_time    = 5000
   max_response_time         = 10000
@@ -33,10 +32,6 @@ resource "checkly_check" "get-users" {
     "eu-central-1",
     "us-west-1"
   ]
-
-  environment_variables = {
-    "key" = "value"
-  }
 
   group_id = checkly_check_group.users-api.id
 
@@ -64,7 +59,6 @@ resource "checkly_check" "post-user" {
   should_fail               = false
   frequency                 = 1
   double_check              = true
-  ssl_check                 = true
   use_global_alert_settings = true
   degraded_response_time    = 5000
   max_response_time         = 10000
@@ -120,7 +114,6 @@ resource "checkly_check" "create-order" {
   should_fail               = false
   frequency                 = 1
   double_check              = true
-  ssl_check                 = true
   use_global_alert_settings = true
   degraded_response_time    = 5000
   max_response_time         = 10000
@@ -156,7 +149,6 @@ resource "checkly_check" "update-order" {
   should_fail               = false
   frequency                 = 1
   double_check              = true
-  ssl_check                 = true
   use_global_alert_settings = true
   degraded_response_time    = 5000
   max_response_time         = 10000
@@ -192,7 +184,6 @@ resource "checkly_check" "cancel-order" {
   should_fail               = false
   frequency                 = 1
   double_check              = true
-  ssl_check                 = true
   use_global_alert_settings = true
   degraded_response_time    = 5000
   max_response_time         = 10000
@@ -228,7 +219,6 @@ resource "checkly_check" "add-to-wishlist" {
   should_fail               = false
   frequency                 = 1
   double_check              = true
-  ssl_check                 = true
   use_global_alert_settings = true
   degraded_response_time    = 5000
   max_response_time         = 10000
@@ -319,7 +309,6 @@ resource "checkly_check" "browser-check" {
   activated    = true
   frequency    = 60
   double_check = true
-  ssl_check    = false
   locations = [
     "us-west-1",
     "us-east-1"
@@ -330,14 +319,40 @@ resource "checkly_check" "browser-check" {
     channel_id = checkly_alert_channel.slack_ac.id
     activated  = true
   }
-  environment_variables = { // This sets check-level environment variables
-    TEST_USER_ID    = "7d8d8288-43a6-44b0-ba08-4c5736c1b6ed",
-    USER_EMAIL      = "user@email.com",
-    USER_PASSWORD   = "supersecure1",
-    FILE_PATH       = "tests/fixtures/file.jpg",
-    TEST_FILE_PATH  = "tests/fixtures/invoice-20-07-02.pdf",
-    ENVIRONMENT_URL = "https://checklyhq.com"
-    PRODUCTS_NUMBER = "3"
+
+  environment_variable {
+    key   = "TEST_USER_ID"
+    value = "7d8d8288-43a6-44b0-ba08-4c5736c1b6ed"
+  }
+
+  environment_variable {
+    key   = "USER_EMAIL"
+    value = "user@email.com"
+  }
+
+  environment_variable {
+    key   = "USER_PASSWORD"
+    value = "supersecure1"
+  }
+
+  environment_variable {
+    key   = "FILE_PATH"
+    value = "tests/fixtures/file.jpg"
+  }
+
+  environment_variable {
+    key   = "TEST_FILE_PATH"
+    value = "tests/fixtures/invoice-20-07-02.pdf"
+  }
+
+  environment_variable {
+    key   = "ENVIRONMENT_URL"
+    value = "https://checklyhq.com"
+  }
+
+  environment_variable {
+    key   = "PRODUCTS_NUMBER"
+    value = "3"
   }
 
   script = file("${path.module}/critical-user-flows/${each.key}") // Assigns the script contained in each file to each new created check resource
